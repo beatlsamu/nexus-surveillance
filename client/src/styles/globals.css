@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nx-bg: #050810;
+  --nx-surface: #0a0f1e;
+  --nx-panel: rgba(10, 20, 40, 0.85);
+  --nx-border: rgba(0, 200, 255, 0.15);
+  --nx-border-active: rgba(0, 200, 255, 0.6);
+  --nx-cyan: #00c8ff;
+  --nx-blue: #0066ff;
+  --nx-green: #00ff88;
+  --nx-red: #ff3366;
+  --nx-text: #e0f0ff;
+  --nx-muted: #4a7090;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--nx-bg);
+  color: var(--nx-text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nx-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 200, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism panel */
+.glass {
+  background: rgba(10, 20, 40, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--nx-border);
+}
+
+.glass-active {
+  background: rgba(10, 20, 40, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--nx-border-active);
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2), inset 0 0 20px rgba(0, 200, 255, 0.05);
+}
+
+/* Camera tile glow */
+.tile-glow {
+  box-shadow:
+    0 0 20px rgba(0, 200, 255, 0.2),
+    inset 0 0 20px rgba(0, 200, 255, 0.05);
+}
+
+/* Pulse dot */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nx-green);
+  box-shadow: 0 0 8px var(--nx-green);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.pulse-dot-red {
+  background: var(--nx-red);
+  box-shadow: 0 0 8px var(--nx-red);
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Scan line animation */
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.4), transparent);
+  animation: scanLine 4s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Signal bars */
+.signal-bar {
+  width: 3px;
+  background: var(--nx-cyan);
+  border-radius: 1px;
+  opacity: 0.3;
+  transition: opacity 0.3s, height 0.3s;
+}
+.signal-bar.active {
+  opacity: 1;
+}
+
+/* Rotate animation for scan circle */
+@keyframes rotateScan {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 20px var(--nx-cyan), 0 0 40px rgba(0, 200, 255, 0.3);
+}
+
+/* Corner decoration */
+.corner-tl::before,
+.corner-tl::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.corner-tl::before {
+  width: 12px;
+  height: 1px;
+  background: var(--nx-cyan);
+}
+.corner-tl::after {
+  width: 1px;
+  height: 12px;
+  background: var(--nx-cyan);
+}
+
+/* Video element reset */
+video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile-specific */
+@media (max-width: 768px) {
+  html, body, #root {
+    overflow: auto;
+  }
+}
